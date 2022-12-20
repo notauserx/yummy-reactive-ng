@@ -12,6 +12,6 @@ export class RecipiesService {
   constructor(private http:  HttpClient) { }
 
   getRecipies(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${environment.basePath}/recipes`);
+    return this.http.get<Recipe[]>(`${environment.baseUrl}/recipies/records`);
   }
 }
