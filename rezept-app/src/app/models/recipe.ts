@@ -1,5 +1,4 @@
 import { Ingredient } from "./ingredient";
-import { Rating } from "./Rating";
 import { RecipeStep } from "./recipeStep";
 
 export interface Recipe {
@@ -8,7 +7,7 @@ export interface Recipe {
   prepTime: number;
   cookingTime: number;
   serves: number;
-  ratings: Rating[];
+  rating: number;
   ingredients: Ingredient[],
   imageUrl: string;
   steps: RecipeStep[]

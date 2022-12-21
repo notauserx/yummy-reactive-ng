@@ -8,10 +8,14 @@ import { environment } from 'src/environment/environment';
   providedIn: 'root'
 })
 export class RecipiesService {
-
   constructor(private http:  HttpClient) { }
 
-  getRecipies(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${environment.baseUrl}/recipies/records`);
-  }
+  result$ = this.http.get<Result>(`${environment.baseUrl}/recipies/records`);
+}
+
+
+interface Result {
+  page: number;
+  pageSize: number;
+  items:Recipe[];
 }
