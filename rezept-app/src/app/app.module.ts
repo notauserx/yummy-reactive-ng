@@ -17,11 +17,15 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {RatingModule} from 'primeng/rating';
 import {RippleModule} from 'primeng/ripple';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { ContainerComponent } from './components/layout/container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeListComponent
+    RecipeListComponent,
+    HeaderComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
