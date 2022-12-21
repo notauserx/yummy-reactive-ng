@@ -16,11 +16,12 @@
                     <div class="recipe-grid-item-content">
                         <img class="recipe-image" [src]="'assets/recipes/'+ recipe.imageUrl" [alt]="recipe.title" />
                         <div class="recipe-name">{{recipe?.title}}</div>
-                        <div class="recipe-description">{{recipe?.title}}</div>
                         <!--
-                        <p-rating class="recipe-rating" [ngModel]="recipe.rating" [readonly]="true" [cancel]="false">
+                        <div class="recipe-description">{{recipe?.title}}</div>
+                        -->
+                        <p-rating class="recipe-rating" [ngModel]="recipe?.rating" [readonly]="true" [cancel]="false">
                         </p-rating>
-                            -->
+                        
                     </div>
                     <div class="recipe-grid-item-bottom">
                         <span class="recipe-prep-time">{{recipe?.prepTime}}min</span>

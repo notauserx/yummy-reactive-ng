@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RecipiesService } from './services/recipies.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 
@@ -26,6 +27,7 @@ import {RippleModule} from 'primeng/ripple';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     
     DataViewModule,
     ButtonModule,
