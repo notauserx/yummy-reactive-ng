@@ -24,6 +24,7 @@ namespace Api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Item")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("RecipeId")
@@ -42,8 +43,9 @@ namespace Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Detail")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Number")
                         .HasColumnType("INTEGER");
@@ -122,7 +124,7 @@ namespace Api.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CookTime")
@@ -137,24 +139,22 @@ namespace Api.Migrations
                     b.Property<string>("PrepTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid?>("RecipeAuthorId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RecipeServings")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("RecipeServings")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("ReviewCount")
+                    b.Property<int?>("ReviewCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("RecipeAuthorId");
 
@@ -181,8 +181,9 @@ namespace Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -235,15 +236,9 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>
                 {
-                    b.HasOne("Rezept.Data.Entities.RecipeCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
                     b.HasOne("Rezept.Data.Entities.RecipeAuthor", null)
                         .WithMany("Recipes")
                         .HasForeignKey("RecipeAuthorId");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>

@@ -10,19 +10,19 @@ public class Recipe
 
     public Guid AuthorId { get; set; }
 
+    public Guid CategoryId { get; set; }
+
     public string? PrepTime { get; set; }
 
     public string? CookTime { get; set; }
 
-    public RecipeCategory? Category { get; set; }
+    public int? Rating { get; set; }
 
-    public int Rating { get; set; }
-
-    public int ReviewCount { get; set; }
+    public int? ReviewCount { get; set; }
 
     public string? ImageUrl { get; set; }
 
-    public string? RecipeServings { get; set; }
+    public int? RecipeServings { get; set; }
 
     public NutritionInfo? NutritionInfo { get; set; }
 
@@ -45,7 +45,7 @@ public class RecipeCategory
 {
     public Guid Id { get; set; }
 
-    public int Name { get; set; }
+    public string Name { get; set; }
 }
 
 public class RecipeKeywords
@@ -68,7 +68,7 @@ public class Ingredient
 {
     public Guid Id { get; set; }
 
-    public string? Item { get; set; }
+    public string Item { get; set; }
 
     public Guid RecipeId { get; set; }
 }
@@ -79,7 +79,7 @@ public class Instruction
 
     public int Number { get; set; }
 
-    public int Detail { get; set; }
+    public string Detail { get; set; }
 
     public Guid RecipeId { get; set; }
 }
