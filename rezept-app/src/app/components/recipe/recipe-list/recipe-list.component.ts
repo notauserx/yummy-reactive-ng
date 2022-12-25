@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe';
 import { RecipiesService } from 'src/app/services/recipies.service';
 
@@ -7,9 +7,10 @@ import { RecipiesService } from 'src/app/services/recipies.service';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.scss']
 })
-export class RecipeListComponent {
+export class RecipeListComponent implements OnInit {
   result$ = this.service.result$;
 
   constructor (private service: RecipiesService) { }
   
+  ngOnInit(): void { }
 }

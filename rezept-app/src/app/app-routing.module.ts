@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { RecipeHomeComponent } from './components/recipe/recipe-home/recipe-home.component';
 
 const routes: Routes = [
-  { path:'', component: RecipeListComponent }
+  { path:'', component: RecipeHomeComponent }
 ];
 
 @NgModule({

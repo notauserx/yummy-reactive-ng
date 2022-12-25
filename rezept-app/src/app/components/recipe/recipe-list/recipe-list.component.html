@@ -1,5 +1,5 @@
 <div class="container p-3">
-  <div *ngIf="result$ | async as result" class="card">
+  <div *ngIf="result$ | async as result else noDataBlock" class="card">
     <p-dataView
       #dv
       [value]="result.items"
@@ -46,4 +46,7 @@
       </ng-template>
     </p-dataView>
   </div>
+  <ng-template #noDataBlock>
+    no data...
+  </ng-template>
 </div>
