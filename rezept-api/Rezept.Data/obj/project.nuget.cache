@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hwh26uHmyAiNdX9ugw0u/illMjAqS1098ZHz5ScVfZh+d6UjL6mhyhjmqNcfjlfJOt+NUEOvDLIS58vTVZbpJA==",
+  "dgSpecHash": "JK7YJ28mndG6zPFQzs4qzBwEFdqZzRKcq7D8aq197m7TYju5f8rD371GYlF1wPUnBrkZLZ/mGbonJfIl7MfXAg==",
   "success": true,
   "projectFilePath": "H:\\portfolio work\\code.v2\\yummy-reactive-ng\\rezept-api\\Rezept.Data\\Rezept.Data.csproj",
   "expectedPackageFiles": [
@@ -21,10 +21,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

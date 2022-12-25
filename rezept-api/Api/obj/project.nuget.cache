@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DqAkF95s6aQKMyyrYz9QntNCSp2gykb0p+9hyidTRdxUjCf9wbQ98cMbqXUG66avFlbFvVyeGJUdR9eI/LP5Uw==",
+  "dgSpecHash": "5roAAFkgr+wCe0VfHdkZ88tk+ivcz2IMsL8zD19KAvqXdB2itJOkAFDfIT8nqAK0nwYa6trqA3iUJKlNsFMAuw==",
   "success": true,
   "projectFilePath": "H:\\portfolio work\\code.v2\\yummy-reactive-ng\\rezept-api\\Api\\Api.csproj",
   "expectedPackageFiles": [
@@ -45,11 +45,7 @@
     "C:\\Users\\user\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.12\\microsoft.netcore.app.host.win-x64.6.0.12.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
