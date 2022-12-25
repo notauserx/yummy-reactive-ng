@@ -20,7 +20,7 @@ namespace Api.Controllers
         [HttpGet]
         public IEnumerable<Recipe> Get()
         {
-            var recipies = _context.Recipes.ToList();
+            var recipies = _context.Recipes.Take(5).ToList();
 
             return recipies;
         }
