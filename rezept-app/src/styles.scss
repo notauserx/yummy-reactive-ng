@@ -57,12 +57,6 @@ a {
   padding: 15px;
 }
 
-.rp-filters {
-  width: 245px;
-  padding: 32px;
-  left:32px;
-}
-
 .row {
   width: 100%;
   display: flex;
@@ -70,25 +64,7 @@ a {
   justify-content: left;
 }
 
-.rp-filters-group {
-  height: 600px;
-  width: 180px;
-  border-color: #dee2e6 !important;
-  // padding-top: 50px;
-}
 
-
-.rp-filter-button button.p-button, .rp-filter-button  .p-button:enabled:active {
-  background:  #f71e68;
-  border-color: #f71e68;
-  padding: 2.5px !important;
-  float: right;
-  margin-bottom: 30px
-}
-
-.rp-filter-button {
-height: 50px;
-}
 
 
 input {

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RecipeHomeComponent } from './components/recipe/recipe-home/recipe-home.component';
+import { RecipeListComponent } from './recipe-module/components/recipe-list/recipe-list.component';
 
 const routes: Routes = [
-  { path:'', component: RecipeHomeComponent }
+  { path:'', component: RecipeListComponent }
 ];
 
 @NgModule({
@@ -14,4 +14,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
