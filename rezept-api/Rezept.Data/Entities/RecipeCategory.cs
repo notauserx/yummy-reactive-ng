@@ -6,7 +6,5 @@ public class RecipeCategory
 
     public string Name { get; set; }
 
-    public Guid RecipeId { get; set; }
-
-    public Recipe Recipe { get; set; }
+    public List<Recipe> Recipes { get; set; }
 }

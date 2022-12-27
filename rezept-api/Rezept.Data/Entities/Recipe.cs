@@ -4,6 +4,8 @@ public class Recipe
 {
     public Guid Id { get; set; }
 
+    public Guid CategoryId { get; set; }
+
     public Guid AuthorId { get; set; }
 
     public string? Title { get; set; }

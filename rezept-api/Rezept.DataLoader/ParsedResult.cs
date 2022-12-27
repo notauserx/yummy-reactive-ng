@@ -64,7 +64,7 @@ public class ParsedResult
             }
 
         }
-        var category = HandleCategory(recipeId, item.RecipeCategory);
+        var category = HandleCategory(item.RecipeCategory);
         var author = HandleAuthor(item.AuthorId, item.AuthorName);
 
         var recipe = new Recipe()
@@ -72,6 +72,7 @@ public class ParsedResult
             Id = recipeId,
             Title = item.Name,
             Description = item.Description,
+            CategoryId = category.Id,
             AuthorId = author.Id,
             PrepTime = item.PrepTime,
             CookTime = item.CookTime,
@@ -174,7 +175,7 @@ public class ParsedResult
         RecipeKeywords[recipeId] = recipeKeywordGuids;
     }
 
-    private RecipeCategory HandleCategory(Guid recipeId,string recipeCategory)
+    private RecipeCategory HandleCategory(string recipeCategory)
     {
         if (!categoriesMap.ContainsKey(recipeCategory))
         {
@@ -182,7 +183,6 @@ public class ParsedResult
             {
                 Id = Guid.NewGuid(),
                 Name = recipeCategory,
-                RecipeId = recipeId
             };
         }
 

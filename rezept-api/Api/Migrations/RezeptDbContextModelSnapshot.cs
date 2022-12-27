@@ -129,6 +129,9 @@ namespace Api.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CookTime")
                         .HasColumnType("TEXT");
 
@@ -156,6 +159,8 @@ namespace Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Recipes");
                 });
@@ -185,13 +190,7 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RecipeId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RecipeId")
-                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -284,18 +283,15 @@ namespace Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Rezept.Data.Entities.RecipeCategory", b =>
-                {
-                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
-                        .WithOne("Category")
-                        .HasForeignKey("Rezept.Data.Entities.RecipeCategory", "RecipeId")
+                    b.HasOne("Rezept.Data.Entities.RecipeCategory", "Category")
+                        .WithMany("Recipes")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Recipe");
+                    b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.RecipeImageUrl", b =>
@@ -332,8 +328,6 @@ namespace Api.Migrations
                 {
                     b.Navigation("AdditionalRecipeImageUrls");
 
-                    b.Navigation("Category");
-
                     b.Navigation("Ingredients");
 
                     b.Navigation("Instructions");
@@ -344,6 +338,11 @@ namespace Api.Migrations
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.RecipeAuthor", b =>
+                {
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeCategory", b =>
                 {
                     b.Navigation("Recipes");
                 });
