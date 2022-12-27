@@ -142,9 +142,6 @@ namespace Api.Migrations
                     b.Property<int?>("Rating")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("RecipeAuthorId")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("RecipeServings")
                         .HasColumnType("INTEGER");
 
@@ -156,7 +153,9 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipeAuthorId");
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Recipes");
                 });
@@ -255,9 +254,21 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>
                 {
-                    b.HasOne("Rezept.Data.Entities.RecipeAuthor", null)
+                    b.HasOne("Rezept.Data.Entities.RecipeAuthor", "Author")
                         .WithMany("Recipes")
-                        .HasForeignKey("RecipeAuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rezept.Data.Entities.RecipeCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.RecipeImageUrl", b =>

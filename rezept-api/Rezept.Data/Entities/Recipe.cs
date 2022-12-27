@@ -24,6 +24,10 @@ public class Recipe
 
     public int? RecipeServings { get; set; }
 
+    public RecipeAuthor? Author { get; set; }
+
+    public RecipeCategory? Category { get; set; }
+
     public NutritionInfo? NutritionInfo { get; set; }
 
     public List<Ingredient>? Ingredients { get; set; }
