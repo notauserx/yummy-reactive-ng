@@ -1,5 +1,63 @@
-
-<div *ngIf="recipeList$ |async as recipes" class="card">
-  {{recipes | json }}
-  
+<div class="content-section introduction">
+  <div class="feature-intro">
+      <h1>Recipes</h1>
+      <p>Stuff and things go here.</p>
   </div>
+</div>
+
+<div class="content-section implementation">
+  <div *ngIf="recipeList$ |async as recipes" class="card">
+      <p-dataView #dv [value]="recipes" [paginator]="true" [rows]="9" filterBy="name" layout="grid">
+          <ng-template pTemplate="header">
+              <div class="flex flex-column md:flex-row md:justify-content-between">
+                  <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown> -->
+                  <span class="p-input-icon-left mb-2 md:mb-0">
+                      <i class="pi pi-search"></i>
+                      <!-- <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)"> -->
+                  </span>
+                  <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+              </div>
+          </ng-template>
+          <ng-template let-recipe pTemplate="listItem">
+              <div class="col-12">
+                  <div class="recipe-list-item">
+                      <img [src]="recipe.imageUrl" [alt]=""/>
+                      <div class="recipe-list-detail">
+                          <div class="recipe-title">{{recipe.title}}</div>
+                          <div class="recipe-description">{{recipe.description}}</div>
+                          <!-- <p-rating [(ngModel)]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                          <i class="pi pi-tag recipe-category-icon"></i><span class="product-category">recipe</span>
+                      </div>
+                      <div class="recipe-list-action">
+                        <span class="recipe-prep-time">{{ recipe?.prepTime }}min</span>
+                        <p-button class="recipe-favourite" icon="pi pi-heart"></p-button>
+                      </div>
+                  </div>
+              </div>
+          </ng-template>
+          <ng-template let-recipe pTemplate="gridItem">
+              <div class="col-12 md:col-4">
+                  <div class="recipe-grid-item card">
+                      <div class="recipe-grid-item-top">
+                          <div>
+                              <i class="pi pi-tag recipe-category-icon"></i>
+                              <span class="recipe-category">category</span>
+                          </div>
+                          
+                      </div>
+                      <div class="recipe-grid-item-content">
+                          <img [src]="recipe.imageUrl" [alt]=""/>
+                          <div class="recipe-title">{{recipe.title}}</div>
+                          <div class="recipe-description">{{recipe.description}}</div>
+                          <!-- <p-rating class="recipe-rating" [ngModel]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                      </div>
+                      <div class="recipe-grid-item-bottom">
+                        <span class="recipe-prep-time">{{ recipe?.prepTime }}min</span>
+                        <p-button class="recipe-favourite" icon="pi pi-heart"></p-button>
+                      </div>
+                  </div>
+              </div>
+          </ng-template>
+      </p-dataView>
+  </div>
+</div>

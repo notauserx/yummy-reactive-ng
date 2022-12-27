@@ -190,6 +190,25 @@ namespace Api.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeImageUrl", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeImageUrls");
+                });
+
             modelBuilder.Entity("Rezept.Data.Entities.RecipeKeywords", b =>
                 {
                     b.Property<Guid>("Id")
@@ -241,8 +260,19 @@ namespace Api.Migrations
                         .HasForeignKey("RecipeAuthorId");
                 });
 
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeImageUrl", b =>
+                {
+                    b.HasOne("Rezept.Data.Entities.Recipe", null)
+                        .WithMany("AdditionalRecipeImageUrls")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>
                 {
+                    b.Navigation("AdditionalRecipeImageUrls");
+
                     b.Navigation("Ingredients");
 
                     b.Navigation("Instructions");

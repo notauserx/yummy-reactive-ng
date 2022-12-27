@@ -8,7 +8,7 @@ const BASE_URL = environment.baseUrl
   providedIn: 'root'
 })
 export class RecipeService {
-  recipeList$ = this.http.get<Recipe[]>(`${BASE_URL}/Rezept`);
+  recipeList$ = this.http.get<Recipe[]>(`${BASE_URL}/rezept`);
 
   constructor(private http: HttpClient) { }
 }

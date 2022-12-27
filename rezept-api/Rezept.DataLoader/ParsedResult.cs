@@ -34,8 +34,32 @@ public class ParsedResult
         var servings = -1;
         int.TryParse(item.RecipeServings, out servings);
 
-        var url = BetweenBrackets(item.Images);
-        if (!url.Contains("http")) url = null;
+        List<RecipeImageUrl> additionalUrls = new();
+
+        var urls = BetweenBrackets(item.Images);
+        string? imageUrl = null;
+        if (!urls.Contains("http")) urls = null;
+        else
+        {
+            var imageUrls = urls.Split("\",");
+
+            if(imageUrls.Length > 0)
+            {
+                imageUrl = imageUrls[0].Replace("\"", "").Trim();
+            }
+
+            for(int i = 1; i < imageUrls.Length; i++)
+            {
+                var obj = new RecipeImageUrl()
+                {
+                    Id = Guid.NewGuid(),
+                    Url = imageUrls[i].Replace("\"", "").Trim(),
+                    RecipeId = recipeId
+                };
+                additionalUrls.Add(obj);
+            }
+
+        }
 
 
         var recipe = new Recipe()
@@ -50,11 +74,12 @@ public class ParsedResult
             CategoryId = category.Id,
             Rating = rating == -1 ? null : rating,
             ReviewCount = reviewCount == -1 ? null : reviewCount,
-            ImageUrl = url,
+            ImageUrl = imageUrl,
             RecipeServings = servings == -1 ? null : servings,
             NutritionInfo = HandleNutritionInfo(item, recipeId),
             Ingredients = HandleIngredients(item.RecipeIngredientParts, item.RecipeIngredientQuantities, recipeId),
-            Instructions = HandleInstructions(item.RecipeInstructions, recipeId)
+            Instructions = HandleInstructions(item.RecipeInstructions, recipeId),
+            AdditionalRecipeImageUrls = additionalUrls
         };
 
         Recipes.Add(recipe);

@@ -4,9 +4,10 @@ import { RecipeStep } from "./recipeStep";
 export interface Recipe {
   id: string;
   title: string;
+  description: string;
   prepTime: number;
-  cookingTime: number;
-  serves: number;
+  cookTime: number;
+  recipeServings: number;
   rating: number;
   ingredients: Ingredient[],
   imageUrl: string;
