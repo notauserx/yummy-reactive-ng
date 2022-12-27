@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 using Rezept.Data.Contexts;
 using Rezept.Data.Entities;
 
@@ -20,7 +20,14 @@ namespace Api.Controllers
         [HttpGet]
         public IEnumerable<Recipe> Get()
         {
-            var recipies = _context.Recipes.Take(50).ToList();
+            var recipies = _context.Recipes
+                .Include(r => r.Author)
+                .Include(r => r.Category)
+                .Include(r => r.Keywords)
+                .Include(r => r.NutritionInfo)
+                .Where(r => r.ImageUrl != null)
+                .Take(50)
+                .ToList();
 
             return recipies;
         }

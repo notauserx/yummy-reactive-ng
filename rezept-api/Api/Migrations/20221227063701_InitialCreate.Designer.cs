@@ -11,8 +11,8 @@ using Rezept.Data.Contexts;
 namespace Api.Migrations
 {
     [DbContext(typeof(RezeptDbContext))]
-    [Migration("20221227054711_AddNavigationPropertiesOnRecipe")]
-    partial class AddNavigationPropertiesOnRecipe
+    [Migration("20221227063701_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,12 @@ namespace Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("RecipeId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("Keywords");
                 });
@@ -126,9 +131,6 @@ namespace Api.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("CookTime")
                         .HasColumnType("TEXT");
 
@@ -157,8 +159,6 @@ namespace Api.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Recipes");
                 });
 
@@ -169,6 +169,7 @@ namespace Api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DisplayName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -186,7 +187,13 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RecipeId")
+                        .IsUnique();
 
                     b.ToTable("Categories");
                 });
@@ -224,34 +231,51 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KeywordId");
+
+                    b.HasIndex("RecipeId");
+
                     b.ToTable("RecipeKeywords");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.Ingredient", b =>
                 {
-                    b.HasOne("Rezept.Data.Entities.Recipe", null)
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
                         .WithMany("Ingredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.Instruction", b =>
                 {
-                    b.HasOne("Rezept.Data.Entities.Recipe", null)
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
                         .WithMany("Instructions")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Rezept.Data.Entities.Keyword", b =>
+                {
+                    b.HasOne("Rezept.Data.Entities.Recipe", null)
+                        .WithMany("Keywords")
+                        .HasForeignKey("RecipeId");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.NutritionInfo", b =>
                 {
-                    b.HasOne("Rezept.Data.Entities.Recipe", null)
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
                         .WithOne("NutritionInfo")
                         .HasForeignKey("Rezept.Data.Entities.NutritionInfo", "RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>
@@ -262,33 +286,61 @@ namespace Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Rezept.Data.Entities.RecipeCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeCategory", b =>
+                {
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
+                        .WithOne("Category")
+                        .HasForeignKey("Rezept.Data.Entities.RecipeCategory", "RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
-
-                    b.Navigation("Category");
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.RecipeImageUrl", b =>
                 {
-                    b.HasOne("Rezept.Data.Entities.Recipe", null)
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
                         .WithMany("AdditionalRecipeImageUrls")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeKeywords", b =>
+                {
+                    b.HasOne("Rezept.Data.Entities.Keyword", "Keyword")
+                        .WithMany()
+                        .HasForeignKey("KeywordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Keyword");
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>
                 {
                     b.Navigation("AdditionalRecipeImageUrls");
 
+                    b.Navigation("Category");
+
                     b.Navigation("Ingredients");
 
                     b.Navigation("Instructions");
+
+                    b.Navigation("Keywords");
 
                     b.Navigation("NutritionInfo");
                 });

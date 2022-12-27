@@ -5,4 +5,8 @@ public class RecipeCategory
     public Guid Id { get; set; }
 
     public string Name { get; set; }
+
+    public Guid RecipeId { get; set; }
+
+    public Recipe Recipe { get; set; }
 }

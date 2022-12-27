@@ -4,13 +4,11 @@ public class Recipe
 {
     public Guid Id { get; set; }
 
+    public Guid AuthorId { get; set; }
+
     public string? Title { get; set; }
 
     public string? Description { get; set; }
-
-    public Guid AuthorId { get; set; }
-
-    public Guid CategoryId { get; set; }
 
     public string? PrepTime { get; set; }
 
@@ -27,6 +25,8 @@ public class Recipe
     public RecipeAuthor? Author { get; set; }
 
     public RecipeCategory? Category { get; set; }
+
+    public List<Keyword>? Keywords { get; set; }
 
     public NutritionInfo? NutritionInfo { get; set; }
 

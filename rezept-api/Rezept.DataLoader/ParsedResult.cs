@@ -61,17 +61,14 @@ public class ParsedResult
 
         }
 
-
         var recipe = new Recipe()
         {
             Id = recipeId,
             Title = item.Name,
             Description = item.Description,
-
             AuthorId = Authors[item.AuthorName],
             PrepTime = item.PrepTime,
             CookTime = item.CookTime,
-            CategoryId = category.Id,
             Rating = rating == -1 ? null : rating,
             ReviewCount = reviewCount == -1 ? null : reviewCount,
             ImageUrl = imageUrl,

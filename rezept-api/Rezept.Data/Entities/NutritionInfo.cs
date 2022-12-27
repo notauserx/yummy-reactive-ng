@@ -21,4 +21,6 @@ public class NutritionInfo
     public decimal ProteinContent { get; set; }
 
     public Guid RecipeId { get; set; }
+    
+    public Recipe Recipe { get; set; }
 }

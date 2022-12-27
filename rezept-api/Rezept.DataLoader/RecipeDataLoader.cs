@@ -31,6 +31,7 @@ public class RecipeDataLoader : IDisposable
     public void ClearData()
     {
         var sql = @"
+            DELETE FROM recipes;
             DELETE FROM authors;
             DELETE FROM categories;
             DELETE FROM ingredients;
@@ -38,8 +39,7 @@ public class RecipeDataLoader : IDisposable
             DELETE FROM keywords;
             DELETE FROM nutritioninfos;
             DELETE FROM recipeimageurls;
-            DELETE FROM recipekeywords;
-            DELETE FROM recipes;";
+            DELETE FROM recipekeywords;";
         context.Database.ExecuteSqlRaw(sql);
     }
 

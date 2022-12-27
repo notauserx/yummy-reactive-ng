@@ -9,4 +9,6 @@ public class Instruction
     public string Detail { get; set; }
 
     public Guid RecipeId { get; set; }
+
+    public Recipe Recipe { get; set; }
 }
