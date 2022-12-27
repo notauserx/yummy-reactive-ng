@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RecipeService } from './services/recipe.service';
 import { PrimeNgModule } from '../primeng.module';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,9 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
   ],
   imports: [
     CommonModule,
-    PrimeNgModule
+    PrimeNgModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     RecipeService

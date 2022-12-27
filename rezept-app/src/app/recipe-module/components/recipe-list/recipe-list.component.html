@@ -1,7 +1,7 @@
 <div class="content-section introduction">
   <div class="feature-intro">
       <h1>Recipes</h1>
-      <p>Stuff and things go here.</p>
+      <p>A curated list of delicacies from Food.com</p>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
                   <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown> -->
                   <span class="p-input-icon-left mb-2 md:mb-0">
                       <i class="pi pi-search"></i>
-                      <!-- <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)"> -->
+                      <input type="search" pInputText placeholder="Search by Name">
                   </span>
                   <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
               </div>
@@ -25,8 +25,9 @@
                       <div class="recipe-list-detail">
                           <div class="recipe-title">{{recipe.title}}</div>
                           <div class="recipe-description">{{recipe.description}}</div>
-                          <!-- <p-rating [(ngModel)]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating> -->
-                          <i class="pi pi-tag recipe-category-icon"></i><span class="product-category">recipe</span>
+                          <p-rating [(ngModel)]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating>
+                          <i class="pi pi-tag recipe-category-icon"></i>
+                          <span class="recipe-category">{{ recipe.category }}</span>
                       </div>
                       <div class="recipe-list-action">
                         <span class="recipe-prep-time">{{ recipe?.prepTime }}min</span>
@@ -41,7 +42,7 @@
                       <div class="recipe-grid-item-top">
                           <div>
                               <i class="pi pi-tag recipe-category-icon"></i>
-                              <span class="recipe-category">category</span>
+                              <span class="recipe-category">{{recipe.category}}</span>
                           </div>
                           
                       </div>
@@ -49,7 +50,7 @@
                           <img [src]="recipe.imageUrl" [alt]=""/>
                           <div class="recipe-title">{{recipe.title}}</div>
                           <div class="recipe-description">{{recipe.description}}</div>
-                          <!-- <p-rating class="recipe-rating" [ngModel]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                          <p-rating class="recipe-rating" [ngModel]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating>
                       </div>
                       <div class="recipe-grid-item-bottom">
                         <span class="recipe-prep-time">{{ recipe?.prepTime }}min</span>
