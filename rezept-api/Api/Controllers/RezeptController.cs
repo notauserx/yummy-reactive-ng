@@ -26,7 +26,7 @@ namespace Api.Controllers
                 .Include(r => r.Keywords)
                 .Include(r => r.NutritionInfo)
                 .Where(r => r.ImageUrl != null)
-                .Take(50)
+                .Take(25)
                 .ToList();
 
             return recipies;
