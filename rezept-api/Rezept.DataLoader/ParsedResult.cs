@@ -4,9 +4,13 @@ namespace Rezept.DataLoader;
 
 public class ParsedResult
 {
-    public Dictionary<string, Guid> Authors = new();
+    private Dictionary<int, RecipeAuthor> authorsMap = new();
 
-    public Dictionary<string, Guid> Categories = new();
+    public List<RecipeAuthor> AuthorsList => authorsMap.Values.ToList();
+
+    private Dictionary<string, RecipeCategory> categoriesMap = new();
+
+    public List<RecipeCategory> CategoriesList => categoriesMap.Values.ToList();
 
     public Dictionary<string, Guid> Keywords = new();
 
@@ -20,8 +24,8 @@ public class ParsedResult
     public void HandleRecord(RecipeItem item)
     {
         var recipeId = Guid.NewGuid();
-        HandleAuthor(item.AuthorId, item.AuthorName);
-        var category = HandleCategory(item.RecipeCategory);
+
+
         HandleKeywords(item.Keywords, recipeId);
 
         var rating = -1;
@@ -60,19 +64,23 @@ public class ParsedResult
             }
 
         }
+        var category = HandleCategory(recipeId, item.RecipeCategory);
+        var author = HandleAuthor(item.AuthorId, item.AuthorName);
 
         var recipe = new Recipe()
         {
             Id = recipeId,
             Title = item.Name,
             Description = item.Description,
-            AuthorId = Authors[item.AuthorName],
+            AuthorId = author.Id,
             PrepTime = item.PrepTime,
             CookTime = item.CookTime,
             Rating = rating == -1 ? null : rating,
             ReviewCount = reviewCount == -1 ? null : reviewCount,
             ImageUrl = imageUrl,
             RecipeServings = servings == -1 ? null : servings,
+            Category = category,
+            Author = author,
             NutritionInfo = HandleNutritionInfo(item, recipeId),
             Ingredients = HandleIngredients(item.RecipeIngredientParts, item.RecipeIngredientQuantities, recipeId),
             Instructions = HandleInstructions(item.RecipeInstructions, recipeId),
@@ -166,23 +174,33 @@ public class ParsedResult
         RecipeKeywords[recipeId] = recipeKeywordGuids;
     }
 
-    private RecipeCategory HandleCategory(string recipeCategory)
+    private RecipeCategory HandleCategory(Guid recipeId,string recipeCategory)
     {
-        if (!Categories.ContainsKey(recipeCategory))
-            Categories[recipeCategory] = Guid.NewGuid();
-
-        return new RecipeCategory()
+        if (!categoriesMap.ContainsKey(recipeCategory))
         {
-            Id = Categories[recipeCategory],
-            Name = recipeCategory
-        };
+            categoriesMap[recipeCategory] = new RecipeCategory()
+            {
+                Id = Guid.NewGuid(),
+                Name = recipeCategory,
+                RecipeId = recipeId
+            };
+        }
+
+        return categoriesMap[recipeCategory];
     }
 
-    private void HandleAuthor(int authorId, string authorName)
+    private RecipeAuthor HandleAuthor(int authorId, string authorName)
     {
-        if (Authors.ContainsKey(authorName)) return;
+        if (!authorsMap.ContainsKey(authorId))
+        {
+            authorsMap[authorId] = new RecipeAuthor()
+            {
+                Id = Guid.NewGuid(),
+                DisplayName = authorName,
+            };
+        }
 
-        Authors[authorName] = Guid.NewGuid();
+        return authorsMap[authorId];
     }
 
     public string BetweenBrackets(string str) => Between(str, "(", ")");

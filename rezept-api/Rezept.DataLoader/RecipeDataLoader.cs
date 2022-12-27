@@ -39,7 +39,8 @@ public class RecipeDataLoader : IDisposable
             DELETE FROM keywords;
             DELETE FROM nutritioninfos;
             DELETE FROM recipeimageurls;
-            DELETE FROM recipekeywords;";
+            DELETE FROM recipekeywords;
+            VACUUM;";
         context.Database.ExecuteSqlRaw(sql);
     }
 
@@ -50,25 +51,12 @@ public class RecipeDataLoader : IDisposable
 
     public void LoadData()
     {
-        foreach (var item in result.Authors)
-        {
-            context.Authors.Add(new RecipeAuthor()
-            {
-                Id = item.Value,
-                DisplayName = item.Key
-            });
-        }
-        context.SaveChanges();
+        context.Categories.AddRange(result.CategoriesList);
+        context.Authors.AddRange(result.AuthorsList);
 
-        foreach (var item in result.Categories)
-        {
-            context.Categories.Add(new RecipeCategory()
-            {
-                Id = item.Value,
-                Name = item.Key
-            });
-        }
-        context.SaveChanges();
+
+        context.Recipes.AddRange(result.Recipes);
+
 
         foreach (var item in result.Keywords)
         {
@@ -77,13 +65,6 @@ public class RecipeDataLoader : IDisposable
                 Id = item.Value,
                 Name = item.Key
             });
-        }
-        context.SaveChanges();
-
-
-        foreach (var recipe in result.Recipes)
-        {
-            context.Recipes.Add(recipe);
         }
 
         context.SaveChanges();
