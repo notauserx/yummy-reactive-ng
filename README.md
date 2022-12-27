@@ -2,6 +2,8 @@
 
 a recipe app built with sqlite, .NET core, Ef core, angular, primeng and more.
 
+![alt screenshot](rezept-app.png)
+
 ## start the server
 
 From rezept-api/Api folder, run
