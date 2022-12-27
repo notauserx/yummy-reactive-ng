@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Rezept.Data.Contexts;
-using Rezept.Data.Entities;
+using Rezept.Api.Contracts;
+using Rezept.Api.Services;
 
 namespace Api.Controllers
 {
@@ -9,27 +8,18 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class RezeptController : ControllerBase
     {
-        private readonly RezeptDbContext _context;
+        private readonly IRecipeListService recipeListService;
 
-        public RezeptController(RezeptDbContext context)
+        public RezeptController(IRecipeListService recipeListService)
         {
-            _context = context;
+            this.recipeListService = recipeListService;
         }
 
 
         [HttpGet]
-        public IEnumerable<Recipe> Get()
+        public IEnumerable<RecipeListItem> Get()
         {
-            var recipies = _context.Recipes
-                .Include(r => r.Author)
-                .Include(r => r.Category)
-                .Include(r => r.Keywords)
-                .Include(r => r.NutritionInfo)
-                .Where(r => r.ImageUrl != null)
-                .Take(25)
-                .ToList();
-
-            return recipies;
+            return recipeListService.GetRecipeListItems();
         }
     }
 }

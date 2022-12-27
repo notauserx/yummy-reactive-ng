@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Rezept.Api.Services;
 using Rezept.Data.Contexts;
 using System.Text.Json.Serialization;
 
@@ -14,6 +15,8 @@ builder.Services
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IRecipeListService, RecipeListService>();
 
 builder.Services.AddDbContext<RezeptDbContext>(
     options =>

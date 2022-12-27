@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rezept.Data\Rezept.Data.csproj" />
+    <ProjectReference Include="..\Rezept.Api.Services\Rezept.Api.Services.csproj" />
   </ItemGroup>
 
 </Project>
