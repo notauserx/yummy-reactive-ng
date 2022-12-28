@@ -1,6 +1,4 @@
-﻿using Rezept.Data.Entities;
-
-namespace Rezept.DataLoader;
+﻿namespace Rezept.DataLoader;
 
 public class ParsedResult
 {

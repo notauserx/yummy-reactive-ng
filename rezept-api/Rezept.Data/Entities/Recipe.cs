@@ -37,4 +37,6 @@ public class Recipe
     public List<Instruction>? Instructions { get; set; }
 
     public List<RecipeImageUrl>? AdditionalRecipeImageUrls { get; set; }
+
+    public List<RecipeReview>? RecipeReviews { get; set; }
 }

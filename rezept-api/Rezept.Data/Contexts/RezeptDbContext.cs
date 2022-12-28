@@ -27,4 +27,6 @@ public class RezeptDbContext : DbContext
     public DbSet<NutritionInfo> NutritionInfos { get; set; }
 
     public DbSet<RecipeImageUrl> RecipeImageUrls { get; set; }
+
+    public DbSet<RecipeReview> RecipeReviews { get; set; }
 }
