@@ -6,7 +6,9 @@ import { RecipeService } from '../../services/recipe.service';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.scss']
 })
+
 export class RecipeListComponent {
-  recipeList$ = this.service.recipeList$
+  recipeList$ = this.service.recipeList$;
+  
   constructor(private service : RecipeService) { }
 }

@@ -7,6 +7,9 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {RatingModule} from 'primeng/rating';
 import {RippleModule} from 'primeng/ripple';
+import {ToastModule} from 'primeng/toast';
+
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   exports: [
@@ -17,7 +20,11 @@ import {RippleModule} from 'primeng/ripple';
     DialogModule,
     InputTextModule,
     RatingModule,
-    RippleModule
+    RippleModule,
+    ToastModule,
+  ],
+  providers: [
+    MessageService,
   ]
 })
 

@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RecipeService } from './services/recipe.service';
 import { PrimeNgModule } from '../primeng.module';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -13,12 +11,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    PrimeNgModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PrimeNgModule,
   ],
   providers: [
-    RecipeService
+    RecipeService,
   ]
 })
 export class RecipeModule { }
