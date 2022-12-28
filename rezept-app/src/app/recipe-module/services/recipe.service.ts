@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe';
 import { environment } from 'src/environment/environment';
 
@@ -16,7 +16,7 @@ export class RecipeService {
       console.log("Logging from catchError...");
       console.log(err);
       this.showError("There was a problem loading recipes. Make sure the server is running and the api call works correctly.");
-      return EMPTY;
+      return throwError(() => new Error(err));
     })
   );
 
@@ -25,6 +25,7 @@ export class RecipeService {
     private messageService: MessageService
   ) {}
 
+  // todo :: refactor and introduce a messageService wrapper in core module
   showError(msg: string) {
     this.messageService.add({
       severity: 'error',
