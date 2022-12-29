@@ -7,7 +7,7 @@ public class RecipeReviewsMappingContext
         return new RecipeReview()
         {
             Id = Guid.NewGuid(),
-            RecipiId = recipeId,
+            RecipeId = recipeId,
             Review = review.Review,
             AuthorId = author.Id,
             Created = review.DateSubmitted,

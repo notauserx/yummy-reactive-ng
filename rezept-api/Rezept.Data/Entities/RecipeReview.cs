@@ -4,7 +4,7 @@ public class RecipeReview
 {
     public Guid Id { get; set; }
 
-    public Guid RecipiId { get; set; }
+    public Guid RecipeId { get; set; }
 
     public Guid AuthorId { get; set; }
 

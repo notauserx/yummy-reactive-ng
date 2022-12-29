@@ -68,7 +68,7 @@ public class EntityMapperContext
         var recipeReview = new RecipeReview()
         {
             Id = Guid.NewGuid(),
-            RecipiId = recipeIdIntToGuid[item.RecipeId],
+            RecipeId = recipeIdIntToGuid[item.RecipeId],
             AuthorId = author.Id,
             Review = item.Review,
             Created = item.DateSubmitted,

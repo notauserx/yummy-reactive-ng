@@ -235,6 +235,37 @@ namespace Api.Migrations
                     b.ToTable("RecipeKeywords");
                 });
 
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeReview", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Review")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeReviews");
+                });
+
             modelBuilder.Entity("Rezept.Data.Entities.Ingredient", b =>
                 {
                     b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
@@ -324,6 +355,25 @@ namespace Api.Migrations
                     b.Navigation("Recipe");
                 });
 
+            modelBuilder.Entity("Rezept.Data.Entities.RecipeReview", b =>
+                {
+                    b.HasOne("Rezept.Data.Entities.RecipeAuthor", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rezept.Data.Entities.Recipe", "Recipe")
+                        .WithMany("RecipeReviews")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Recipe");
+                });
+
             modelBuilder.Entity("Rezept.Data.Entities.Recipe", b =>
                 {
                     b.Navigation("AdditionalRecipeImageUrls");
@@ -335,6 +385,8 @@ namespace Api.Migrations
                     b.Navigation("Keywords");
 
                     b.Navigation("NutritionInfo");
+
+                    b.Navigation("RecipeReviews");
                 });
 
             modelBuilder.Entity("Rezept.Data.Entities.RecipeAuthor", b =>
