@@ -19,7 +19,8 @@ public class RecipeReviewsMappingContext
     public List<RecipeReview> HandleReviews(Guid recipeId, List<ReviewItem> reviewItems, RecipeAuthorsMappingContext authorsMappingContext)
     {
         List<RecipeReview> result = new();
-        foreach(var item in reviewItems)
+        
+        foreach(var item in reviewItems ?? Enumerable.Empty<ReviewItem>())
         {
             var author = authorsMappingContext.HandleAuthor(item.AuthorId, item.AuthorName);
 

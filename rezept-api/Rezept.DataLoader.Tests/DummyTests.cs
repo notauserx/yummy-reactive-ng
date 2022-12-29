@@ -1,6 +1,6 @@
 namespace Rezept.DataLoader.Tests
 {
-    public class EntityMapperContextTests
+    public class DummyTests
     {
         [Fact]
         public void ShoouldCreateAuthor()
@@ -35,11 +35,6 @@ namespace Rezept.DataLoader.Tests
                 RecipeInstructions: "c(\"step s\""
                 );
 
-            var context = new EntityMapperContext();
-
-            context.HandleRecipeItem(recipe);
-
-            Assert.Single(context.MappedResult.Recipes);
         }
     }
 }
