@@ -10,7 +10,7 @@ const BASE_URL = environment.baseUrl;
   providedIn: 'root',
 })
 export class RecipeService {
-  recipeList$ = this.http.get<Recipe[]>(`${BASE_URL}/rezept`)
+  recipeList$ = this.http.get<Recipe[]>(`${BASE_URL}/recipes`)
   .pipe(
     catchError(err => {
       console.log("Logging from catchError...");
