@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rezept.Data.Contexts;
-using Rezept.Data.Entities;
 
 namespace Rezept.DataLoader;
 
