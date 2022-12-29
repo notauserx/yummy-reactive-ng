@@ -17,6 +17,7 @@ namespace Api.Controllers
 
 
         [HttpGet]
+        [HttpHead] 
         public IEnumerable<RecipeListItem> Get()
         {
             return recipeListService.GetRecipeListItems();
