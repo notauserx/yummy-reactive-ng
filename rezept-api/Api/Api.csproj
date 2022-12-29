@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rezept.Api.Services\Rezept.Api.Services.csproj" />
+    <ProjectReference Include="..\Rezept.Data.Migrations\Rezept.Data.Migrations.csproj" />
   </ItemGroup>
 
 </Project>

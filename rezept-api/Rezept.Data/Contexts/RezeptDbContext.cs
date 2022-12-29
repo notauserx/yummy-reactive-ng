@@ -39,6 +39,8 @@ public class RezeptDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
+    public DbSet<User> Users { get; set; }
+
     public DbSet<Recipe> Recipes { get; set; }
 
     public DbSet<RecipeAuthor> Authors { get; set; }

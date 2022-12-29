@@ -26,7 +26,7 @@ builder.Services.AddDbContext<RezeptDbContext>(
     options =>
         options.UseSqlite(
             builder.Configuration.GetConnectionString("RezeptDb"),
-            x => x.MigrationsAssembly("Api")));
+            x => x.MigrationsAssembly("Rezept.Data.Migrations")));
 
 builder.Services.AddCors(options =>
 {
