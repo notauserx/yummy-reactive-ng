@@ -52,9 +52,6 @@ public class RecipeDataLoader : IDisposable
 
     public void LoadData()
     {
-        //context.Categories.AddRange(result.CategoriesList);
-        //context.Authors.AddRange(result.AuthorsList);
-
         dbContext.Recipes.AddRange(mappingContext.Recipes);
         dbContext.RecipeKeywords.AddRange(mappingContext.RecipeKeywords);
 
