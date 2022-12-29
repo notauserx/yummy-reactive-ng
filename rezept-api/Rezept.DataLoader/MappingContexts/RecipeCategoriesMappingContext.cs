@@ -4,21 +4,27 @@ public class RecipeCategoriesMappingContext
 {
     private Dictionary<string, RecipeCategory> categoriesMap = new();
 
-    public List<RecipeCategory> Categories { get; set; } = new();
+    public List<RecipeCategory> Categories => categoriesMap.Values.ToList();
 
     public RecipeCategory HandleCategory(string recipeCategory)
     {
-        if (!categoriesMap.ContainsKey(recipeCategory))
-        {
-            categoriesMap[recipeCategory] = new RecipeCategory()
-            {
-                Id = Guid.NewGuid(),
-                Name = recipeCategory,
-            };
-
-            Categories.Add(categoriesMap[recipeCategory]);
-        }
+        AddCategoryIfNew(recipeCategory);
 
         return categoriesMap[recipeCategory];
     }
+
+    private bool IsNewCategory(string category) => !categoriesMap.ContainsKey(category);
+
+    private void AddCategoryIfNew(string category)
+    {
+        if (IsNewCategory(category))
+        {
+            categoriesMap[category] = new RecipeCategory()
+            {
+                Id = Guid.NewGuid(),
+                Name = category,
+            };
+        }
+    }
+
 }

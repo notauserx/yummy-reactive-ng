@@ -1,5 +1,4 @@
-﻿using Rezept.DataLoader.MappingContexts;
-
+﻿
 namespace Rezept.DataLoader.Tests.MappingContextTests;
 
 public class RecipeAuthorsMappingContextTests
@@ -34,18 +33,6 @@ public class RecipeAuthorsMappingContextTests
 
         Assert.Equal(result.Id, result1.Id);
         Assert.Single(context.Authors);
-
-    }
-
-    [Fact]
-    public void should_update_int_to_guid_map_when_new_author_is_created()
-    {
-        var context = new RecipeAuthorsMappingContext();
-        var result = context.HandleAuthor(1, "11");
-
-        var expected = context.GetAuthorGuid(1);
-
-        Assert.Equal(result.Id, expected);
 
     }
 }
