@@ -22,4 +22,11 @@ public class RecipesController : ControllerBase
     {
         return recipeListService.GetRecipeListItems();
     }
+
+    [HttpOptions]
+    public IActionResult GetRecipesOptions()
+    {
+        Response.Headers.Add("Allow", "GET, HEAD, OPTIONS");
+        return Ok();
+    }
 }
