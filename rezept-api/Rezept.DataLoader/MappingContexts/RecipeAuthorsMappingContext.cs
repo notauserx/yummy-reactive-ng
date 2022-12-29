@@ -37,7 +37,7 @@ public class RecipeAuthorsMappingContext
         return authorsMap[authorId];
     }
 
-    public RecipeAuthor GetExistingOrCreatedAuthor(int authorId, string authorName)
+    public RecipeAuthor HandleAuthor(int authorId, string authorName)
     {
         AddAuthorToContextIfNewAuthor(authorId, authorName);
         return GetAuthor(authorId);

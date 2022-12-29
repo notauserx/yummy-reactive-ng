@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Rezept.DataLoader.MappingContexts;
 
 namespace Rezept.DataLoader;
 
 public class RecipeDataLoader : IDisposable
 {
-    private readonly ParsedResult result;
 
-    private readonly RezeptDbContext context;
-    private RecipeDataLoader(RezeptDbContext context, ParsedResult result)
+    private readonly RezeptDbContext dbContext;
+    private readonly MappingContext mappingContext = new();
+    private RecipeDataLoader(RezeptDbContext context)
     {
-        this.context = context;
-        this.result = result;
+        dbContext = context;
 
     }
 
-    public static RecipeDataLoader CreateDefault(ParsedResult result)
+    public static RecipeDataLoader CreateDefault()
     {
         var dbPath = "..//..//..//..//Api//rezept.db";
         var contextOptions = new DbContextOptionsBuilder<RezeptDbContext>()
@@ -23,7 +23,7 @@ public class RecipeDataLoader : IDisposable
             .Options;
         var context = new RezeptDbContext(contextOptions);
 
-        return new RecipeDataLoader(context, result);
+        return new RecipeDataLoader(context);
     }
 
     public void ClearData()
@@ -38,53 +38,31 @@ public class RecipeDataLoader : IDisposable
             DELETE FROM nutritioninfos;
             DELETE FROM recipeimageurls;
             DELETE FROM recipekeywords;
+            DELETE FROM recipereviews;
             VACUUM;";
-        context.Database.ExecuteSqlRaw(sql);
+        dbContext.Database.ExecuteSqlRaw(sql);
+    }
+
+    public void RunMappings(IEnumerable<RecipeItem> recipeItems, IEnumerable<ReviewItem> reviewItems)
+    {
+        mappingContext.AddReviewItems(reviewItems);
+        mappingContext.UpdateRecipesMappingContext(recipeItems);
+    }
+    
+
+    public void LoadData()
+    {
+        //context.Categories.AddRange(result.CategoriesList);
+        //context.Authors.AddRange(result.AuthorsList);
+
+        dbContext.Recipes.AddRange(mappingContext.Recipes);
+        dbContext.RecipeKeywords.AddRange(mappingContext.RecipeKeywords);
+
+        dbContext.SaveChanges();
     }
 
     public void Dispose()
     {
-        context.Dispose();
-    }
-
-    public void LoadData()
-    {
-        context.Categories.AddRange(result.CategoriesList);
-        context.Authors.AddRange(result.AuthorsList);
-
-
-        context.Recipes.AddRange(result.Recipes);
-
-
-        foreach (var item in result.Keywords)
-        {
-            context.Keywords.Add(new Keyword()
-            {
-                Id = item.Value,
-                Name = item.Key
-            });
-        }
-
-        context.SaveChanges();
-
-
-        foreach (var item in result.RecipeKeywords)
-        {
-            var rKeys = new List<RecipeKeywords>();
-            var recipeId = item.Key;
-
-            foreach (var recipeKeywordId in item.Value)
-            {
-                rKeys.Add(new RecipeKeywords()
-                {
-                    Id = Guid.NewGuid(),
-                    KeywordId = recipeKeywordId,
-                    RecipeId = recipeId
-                });
-            }
-            context.RecipeKeywords.AddRange(rKeys);
-        }
-
-        context.SaveChanges();
+        dbContext.Dispose();
     }
 }

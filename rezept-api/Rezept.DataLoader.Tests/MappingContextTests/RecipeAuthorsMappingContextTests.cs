@@ -17,7 +17,7 @@ public class RecipeAuthorsMappingContextTests
     {
         var context = new RecipeAuthorsMappingContext();
 
-        var result = context.GetExistingOrCreatedAuthor(1, "11");
+        var result = context.HandleAuthor(1, "11");
 
         Assert.NotNull(result);
         Assert.Single(context.Authors);
@@ -29,8 +29,8 @@ public class RecipeAuthorsMappingContextTests
     {
         var context = new RecipeAuthorsMappingContext();
 
-        var result = context.GetExistingOrCreatedAuthor(1, "11");
-        var result1 = context.GetExistingOrCreatedAuthor(1, "11");
+        var result = context.HandleAuthor(1, "11");
+        var result1 = context.HandleAuthor(1, "11");
 
         Assert.Equal(result.Id, result1.Id);
         Assert.Single(context.Authors);
@@ -41,7 +41,7 @@ public class RecipeAuthorsMappingContextTests
     public void should_update_int_to_guid_map_when_new_author_is_created()
     {
         var context = new RecipeAuthorsMappingContext();
-        var result = context.GetExistingOrCreatedAuthor(1, "11");
+        var result = context.HandleAuthor(1, "11");
 
         var expected = context.GetAuthorGuid(1);
 
