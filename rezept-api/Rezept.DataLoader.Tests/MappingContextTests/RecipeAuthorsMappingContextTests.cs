@@ -4,7 +4,7 @@ namespace Rezept.DataLoader.Tests.MappingContextTests;
 public class RecipeAuthorsMappingContextTests
 {
     [Fact]
-    public void authors_is_empty_initially()
+    public void Wnen_initialized_then_authors_is_empty()
     {
         var authorMappingContext = new RecipeAuthorsMappingContext();
 
@@ -12,7 +12,7 @@ public class RecipeAuthorsMappingContextTests
     }
 
     [Fact]
-    public void authors_is_added_when_new_authorId_is_passed()
+    public void When_new_authorId_is_passed_then_it_adds_a_new_author()
     {
         var context = new RecipeAuthorsMappingContext();
 
@@ -24,7 +24,7 @@ public class RecipeAuthorsMappingContextTests
     }
 
     [Fact]
-    public void existing_author_is_returned_when_existing_authorId_is_passed()
+    public void When_existing_authorId_is_passed_then_an_existing_author_is_returned_()
     {
         var context = new RecipeAuthorsMappingContext();
 

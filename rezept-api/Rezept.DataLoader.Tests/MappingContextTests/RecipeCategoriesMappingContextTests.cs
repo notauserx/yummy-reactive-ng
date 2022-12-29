@@ -3,7 +3,7 @@
 public class RecipeCategoriesMappingContextTests
 {
     [Fact]
-    public void should_add_new_category()
+    public void When_new_category_is_given_then_creates_a_new_category_entity()
     {
         var context = new RecipeCategoriesMappingContext();
 
@@ -13,7 +13,7 @@ public class RecipeCategoriesMappingContextTests
     }
 
     [Fact]
-    public void should_set_id()
+    public void Sets_id_to_created_category_entity()
     {
         var context = new RecipeCategoriesMappingContext();
 
@@ -23,7 +23,7 @@ public class RecipeCategoriesMappingContextTests
     }
 
     [Fact]
-    public void should_not_add_new_category_if_exists()
+    public void When_an_existing_category_is_given_then_returns_the_existing_category_entity()
     {
         var context = new RecipeCategoriesMappingContext();
 
