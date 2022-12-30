@@ -25,6 +25,21 @@ export class RecipeService {
     private messageService: MessageService
   ) {}
 
+  getFilteredRecipes(searchTerm: string) {
+    const href = `${BASE_URL}/recipes`;
+    const requestUrl = `${href}?searchTerm=${searchTerm}`;
+
+    return this.http.get<Recipe[]>(requestUrl)
+    .pipe(
+      catchError(err => {
+        console.log("Logging from catchError...");
+        console.log(err);
+        this.showError("There was a problem searching recipes. Make sure the server is running and the api call works correctly.");
+        return throwError(() => new Error(err));
+      })
+    );;
+  }
+
   // todo :: refactor and introduce a messageService wrapper in core module
   showError(msg: string) {
     this.messageService.add({

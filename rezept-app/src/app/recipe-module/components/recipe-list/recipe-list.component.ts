@@ -8,12 +8,24 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrls: ['./recipe-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class RecipeListComponent {
   recipeList$ = this.service.recipeList$
     .pipe(
       catchError(_ => EMPTY)
     );
+
+  filter: RecipeFilter = {searchTerm: ''}
   
   constructor(private service : RecipeService) { }
+
+  onSearch() {
+    console.log(this.filter)
+    this.recipeList$ = this.service.getFilteredRecipes(this.filter.searchTerm);
+
+
+  }
+}
+
+interface RecipeFilter{
+  searchTerm: string,
 }
