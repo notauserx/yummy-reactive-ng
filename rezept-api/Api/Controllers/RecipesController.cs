@@ -14,10 +14,10 @@ public class RecipesController : ControllerBase
     [HttpGet]
     [HttpHead] 
     public IEnumerable<RecipeListItem> GetRecipes(
-        [FromServices] IRecipeListService service,
-        string? searchTerm)
+        [FromServices]  IRecipeListService service,
+        [FromQuery]     RecipeListRequestParams requestParams)
     {
-        return service.GetRecipeListItems(searchTerm);
+        return service.GetRecipeListItems(requestParams);
     }
 
     [HttpGet]

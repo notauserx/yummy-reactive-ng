@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe';
+import { RecipeCategory } from 'src/app/models/recipeCategory';
+import { RecipeFilter } from 'src/app/models/recipeFilter';
 import { environment } from 'src/environment/environment';
 
 const BASE_URL = environment.baseUrl;
@@ -10,6 +12,7 @@ const BASE_URL = environment.baseUrl;
   providedIn: 'root',
 })
 export class RecipeService {
+  recipeCategoryList$ = this.http.get<RecipeCategory[]>(`${BASE_URL}/recipes/categories`)
   recipeList$ = this.http.get<Recipe[]>(`${BASE_URL}/recipes`)
   .pipe(
     catchError(err => {
@@ -25,9 +28,10 @@ export class RecipeService {
     private messageService: MessageService
   ) {}
 
-  getFilteredRecipes(searchTerm: string) {
+  getFilteredRecipes(filter: RecipeFilter) {
     const href = `${BASE_URL}/recipes`;
-    const requestUrl = `${href}?searchTerm=${searchTerm}`;
+    // TODO :: URI encode search term and category
+    const requestUrl = `${href}?searchTerm=${filter.searchTerm}&category=${filter.category}`;
 
     return this.http.get<Recipe[]>(requestUrl)
     .pipe(

@@ -1,6 +1,5 @@
+
 export interface RecipeFilter {
-  title?: string;
-  prepTime?: number;
-  cookingTime?: number;
-  serves?: number;
+  searchTerm: string;
+  category: string;
 }

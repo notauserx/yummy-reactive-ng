@@ -2,5 +2,5 @@
 
 public interface IRecipeListService
 {
-    IEnumerable<RecipeListItem> GetRecipeListItems(string? searchTerm);
+    IEnumerable<RecipeListItem> GetRecipeListItems(RecipeListRequestParams requestParams);
 }

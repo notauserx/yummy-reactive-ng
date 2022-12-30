@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rezept.Api.Contracts;
 using Rezept.Data.Contexts;
 
 namespace Rezept.Api.Services;
@@ -13,7 +12,7 @@ public class RecipeListService : IRecipeListService
         this.rezeptDbContext = rezeptDbContext;
     }
 
-    public IEnumerable<RecipeListItem> GetRecipeListItems(string? searchTerm)
+    public IEnumerable<RecipeListItem> GetRecipeListItems(RecipeListRequestParams requestParams)
     {
 
         var recipes = rezeptDbContext.Recipes
@@ -21,11 +20,17 @@ public class RecipeListService : IRecipeListService
                 .Include(r => r.Category)
                 .AsQueryable();
 
-        if (!string.IsNullOrWhiteSpace(searchTerm))
+        if (!string.IsNullOrWhiteSpace(requestParams.SearchTerm))
         {
-            searchTerm = searchTerm.Trim();
-            recipes = recipes.Where(r => r.Title != null && r.Title.ToLower().Contains(searchTerm.ToLower()));
+            var searchTerm = requestParams.SearchTerm.Trim().ToLower();
+            recipes = recipes.Where(r => r.Title != null && r.Title.ToLower().Contains(searchTerm));
         }
+
+        if(!string.IsNullOrWhiteSpace(requestParams.Category))
+        {
+            recipes = recipes.Where(r => r.Category != null && r.Category.Name == requestParams.Category);
+        }
+
         return // TODO :: use automapper 
             (from recipe in recipes.Take(90).ToList()
              select new RecipeListItem(
