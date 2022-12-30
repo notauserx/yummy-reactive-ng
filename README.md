@@ -12,10 +12,12 @@ From rezept-api/Api folder, run
 dotnet run
 ```
 
-After changing entities, run
+Migrations are moved to Rezept.Data.Migrations
+
+After changing entities, run (from the Api project directory)
 
 ```
- dotnet ef migrations add <migration_name>
+dotnet ef migrations add <migration_name> --project ../Rezept.Data.Migrations
 ```
 
 to update the database ->
