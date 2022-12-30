@@ -13,21 +13,22 @@ public class RecipeListService : IRecipeListService
         this.rezeptDbContext = rezeptDbContext;
     }
 
-    public IEnumerable<RecipeListItem> GetRecipeListItems()
+    public IEnumerable<RecipeListItem> GetRecipeListItems(string? searchTerm)
     {
+
         var recipes = rezeptDbContext.Recipes
-            .Include(r => r.Author)
+                .Include(r => r.Author)
                 .Include(r => r.Category)
-                .Where(r => r.ImageUrl != null)
-                .Take(90)
-                .ToList();
+                .AsQueryable();
 
-        // TODO :: use automapper
-        var result = new List<RecipeListItem>();
-
-        foreach (var recipe in recipes)
+        if (!string.IsNullOrWhiteSpace(searchTerm))
         {
-            result.Add(new RecipeListItem(
+            searchTerm = searchTerm.Trim();
+            recipes = recipes.Where(r => r.Title != null && r.Title.ToLower().Contains(searchTerm.ToLower()));
+        }
+        return // TODO :: use automapper 
+            (from recipe in recipes.Take(90).ToList()
+             select new RecipeListItem(
                 recipe.Id,
                 Title: recipe.Title,
                 Description: recipe.Description,
@@ -36,9 +37,7 @@ public class RecipeListService : IRecipeListService
                 Category: recipe?.Category?.Name ?? string.Empty,
                 imageUrl: recipe.ImageUrl,
                 prepTime: recipe.PrepTime,
-                cookTime: recipe.CookTime));
-        }
-
-        return result;
+                cookTime: recipe.CookTime)
+             );
     }
 }

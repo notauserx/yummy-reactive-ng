@@ -18,9 +18,9 @@ public class RecipesController : ControllerBase
 
     [HttpGet]
     [HttpHead] 
-    public IEnumerable<RecipeListItem> Get()
+    public IEnumerable<RecipeListItem> GetRecipes(string? searchTerm)
     {
-        return recipeListService.GetRecipeListItems();
+        return recipeListService.GetRecipeListItems(searchTerm);
     }
 
     [HttpOptions]
