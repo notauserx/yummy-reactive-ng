@@ -3,15 +3,17 @@ using Rezept.Data.Contexts;
 
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services
-    .AddControllers(configure =>
+    .AddControllers(options =>
     {
-        configure.ReturnHttpNotAcceptable = true;
+        options.ReturnHttpNotAcceptable = true;
+        options.Filters.Add(new ProducesAttribute("application/json"));
     })
     .AddJsonOptions(x =>
         x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -21,6 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRecipeListService, RecipeListService>();
+builder.Services.AddScoped<IRecipeCategoryService, RecipeCategoryService>();
 
 builder.Services.AddDbContext<RezeptDbContext>(
     options =>

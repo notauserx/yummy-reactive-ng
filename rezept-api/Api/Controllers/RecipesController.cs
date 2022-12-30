@@ -5,22 +5,28 @@ using Rezept.Api.Services;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/recipes")]
 public class RecipesController : ControllerBase
 {
-    private readonly IRecipeListService recipeListService;
-
-    public RecipesController(IRecipeListService recipeListService)
-    {
-        this.recipeListService = recipeListService;
-    }
+    public RecipesController() { }
 
 
     [HttpGet]
     [HttpHead] 
-    public IEnumerable<RecipeListItem> GetRecipes(string? searchTerm)
+    public IEnumerable<RecipeListItem> GetRecipes(
+        [FromServices] IRecipeListService service,
+        string? searchTerm)
     {
-        return recipeListService.GetRecipeListItems(searchTerm);
+        return service.GetRecipeListItems(searchTerm);
+    }
+
+    [HttpGet]
+    [HttpHead]
+    [Route("categories")]
+    public IEnumerable<RecipeCategoryItem> GetRecipeCategories(
+        [FromServices] IRecipeCategoryService service)
+    {
+        return service.GetRecipeCategories();
     }
 
     [HttpOptions]

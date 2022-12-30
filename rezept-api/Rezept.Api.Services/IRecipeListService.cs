@@ -1,9 +1,6 @@
-﻿using Rezept.Api.Contracts;
+﻿namespace Rezept.Api.Services;
 
-namespace Rezept.Api.Services
+public interface IRecipeListService
 {
-    public interface IRecipeListService
-    {
-        IEnumerable<RecipeListItem> GetRecipeListItems(string? searchTerm);
-    }
+    IEnumerable<RecipeListItem> GetRecipeListItems(string? searchTerm);
 }
