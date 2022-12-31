@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { catchError, EMPTY } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Recipe } from 'src/app/models/recipe';
 import { RecipeFilter } from 'src/app/models/recipeFilter';
 import { RecipeService } from '../../services/recipe.service';
 
@@ -9,25 +10,42 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrls: ['./recipe-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeListComponent {
+export class RecipeListComponent implements OnInit {
+  
   recipeCategoryList$ = this.service.recipeCategoryList$
-  recipeList$ = this.service.recipeList$
-    .pipe(
-      catchError(_ => EMPTY)
-    );
+  recipeList$: Observable<Recipe[]>| undefined;
 
   filter: RecipeFilter = {
     searchTerm: '',
-    category: ''
+    category: '',
+    pageNumber: 1,
+    pageSize: 9
   }
   
   constructor(private service : RecipeService) { }
+  
+  ngOnInit(): void {
+    this.recipeList$ = this.service.getRecipes(this.filter);
+  }
+
+  onPaginate($event: PaginatorEvent) {
+    console.log($event);
+    var page = ($event.first / $event.rows) + 1;
+    this.filter.pageNumber = page;
+    this.filter.pageSize = $event.rows;
+
+    this.updateRecipeList();
+  }
 
   onSearch() {
-    console.log(this.filter)
-    this.recipeList$ = this.service.getFilteredRecipes(this.filter);
+    this.filter.pageNumber = 1
 
+    this.updateRecipeList();
+  }
 
+  private updateRecipeList() {
+    this.recipeList$ = this.service.getRecipes(this.filter);
   }
 }
 
+interface PaginatorEvent { first: number, rows: number }

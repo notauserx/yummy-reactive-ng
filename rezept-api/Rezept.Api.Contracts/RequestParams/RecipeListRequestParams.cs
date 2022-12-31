@@ -3,6 +3,8 @@
 public record RecipeListRequestParams
 (
     string? SearchTerm,
-    string? Category
+    string? Category,
+    int PageNumber = 1,
+    int PageSize = 10
 )
 { }

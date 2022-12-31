@@ -6,8 +6,16 @@
 </div>
 <p-toast position="bottom-right"></p-toast>
 <div class="content-section implementation">
-    <div *ngIf="recipeList$ |async as recipes" class="card">
-        <p-dataView #dv [value]="recipes" [paginator]="true" [rows]="9" filterBy="name" layout="grid">
+    <div *ngIf="{recipes: recipeList$ |async} as data" class="card">
+        <p-dataView #dv 
+          [value]="data.recipes ?? []" 
+          [paginator]="true" 
+          [rows]="9" 
+          [totalRecords]="90" 
+          filterBy="name" 
+          layout="grid" 
+          [lazy]="true" 
+          (onLazyLoad)="onPaginate($event)">
             <ng-template pTemplate="header">
                 <div class="flex flex-column md:flex-row md:justify-content-between">
                     <div class="form-group">

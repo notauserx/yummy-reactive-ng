@@ -32,7 +32,9 @@ public class RecipeListService : IRecipeListService
         }
 
         return // TODO :: use automapper 
-            (from recipe in recipes.Take(90).ToList()
+            (from recipe in recipes
+                .Skip(requestParams.PageSize * (requestParams.PageNumber - 1))
+                .Take(requestParams.PageSize).ToList()
              select new RecipeListItem(
                 recipe.Id,
                 Title: recipe.Title,

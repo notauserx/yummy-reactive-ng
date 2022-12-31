@@ -1,5 +1,7 @@
 
 export interface RecipeFilter {
-  searchTerm: string;
-  category: string;
+  searchTerm?: string;
+  category?: string;
+  pageNumber: number;
+  pageSize: number;
 }

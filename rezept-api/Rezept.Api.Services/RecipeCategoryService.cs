@@ -13,8 +13,10 @@ public class RecipeCategoryService : IRecipeCategoryService
 
     public IEnumerable<RecipeCategoryItem> GetRecipeCategories()
     {
-        return
-            from category in rezeptDbContext.Categories
-            select new RecipeCategoryItem(category.Name);
+        var results = (from category in rezeptDbContext.Categories
+                      select new RecipeCategoryItem(category.Name)).ToList();
+        results.Insert(0, new RecipeCategoryItem(""));
+
+        return results;
     }
 }
