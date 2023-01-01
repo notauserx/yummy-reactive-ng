@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Rezept.Api.Services.Core;
 using Rezept.Data.Contexts;
 
 namespace Rezept.Api.Services;
@@ -12,7 +13,7 @@ public class RecipeListService : IRecipeListService
         this.rezeptDbContext = rezeptDbContext;
     }
 
-    public IEnumerable<RecipeListItem> GetRecipeListItems(RecipeListRequestParams requestParams)
+    public PagedList<Recipe> GetRecipeListItems(RecipeListRequestParams requestParams)
     {
 
         var recipes = rezeptDbContext.Recipes
@@ -31,20 +32,9 @@ public class RecipeListService : IRecipeListService
             recipes = recipes.Where(r => r.Category != null && r.Category.Name == requestParams.Category);
         }
 
-        return // TODO :: use automapper 
-            (from recipe in recipes
-                .Skip(requestParams.PageSize * (requestParams.PageNumber - 1))
-                .Take(requestParams.PageSize).ToList()
-             select new RecipeListItem(
-                recipe.Id,
-                Title: recipe.Title,
-                Description: recipe.Description,
-                Rating: recipe.Rating,
-                Serves: recipe.RecipeServings,
-                Category: recipe?.Category?.Name ?? string.Empty,
-                imageUrl: recipe.ImageUrl,
-                prepTime: recipe.PrepTime,
-                cookTime: recipe.CookTime)
-             );
+        return PagedList<Recipe>.Create(
+            recipes,
+            requestParams.PageNumber,
+            requestParams.PageSize);
     }
 }

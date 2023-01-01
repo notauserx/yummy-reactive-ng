@@ -31,6 +31,8 @@ builder.Services.AddDbContext<RezeptDbContext>(
             builder.Configuration.GetConnectionString("RezeptDb"),
             x => x.MigrationsAssembly("Rezept.Data.Migrations")));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(

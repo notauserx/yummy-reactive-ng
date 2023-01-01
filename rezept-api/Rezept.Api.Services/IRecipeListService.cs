@@ -1,6 +1,8 @@
-﻿namespace Rezept.Api.Services;
+﻿using Rezept.Api.Services.Core;
+
+namespace Rezept.Api.Services;
 
 public interface IRecipeListService
 {
-    IEnumerable<RecipeListItem> GetRecipeListItems(RecipeListRequestParams requestParams);
+    PagedList<Recipe> GetRecipeListItems(RecipeListRequestParams requestParams);
 }

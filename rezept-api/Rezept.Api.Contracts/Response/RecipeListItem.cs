@@ -1,14 +1,14 @@
 ﻿namespace Rezept.Api.Contracts;
 
-public record RecipeListItem
-(
-    Guid Id, 
-    string? Title,
-    string? Description,
-    int? Rating,
-    int? Serves,
-    string? Category,
-    string? imageUrl,
-    string? prepTime,
-    string? cookTime
-);
+public class RecipeListItem
+{
+    public Guid Id { get; set; }
+    public string? Title { get; set; }
+    public string? Description { get; set; }
+    public int? Rating { get; set; }
+    public int? Serves { get; set; }
+    public string? Category { get; set; }
+    public string? imageUrl { get; set; }
+    public string? prepTime { get; set; }
+    public string? cookTim { get; set; }
+}
