@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Rezept.Api.Contracts;
 using Rezept.Api.Services;
-using System.Text.Json;
 
 namespace Api.Controllers;
 
@@ -16,27 +15,22 @@ public class RecipesController : ControllerBase
         _mapper = mapper;
     }
 
-
     [HttpGet]
     [HttpHead] 
-    public IEnumerable<RecipeListItem> GetRecipes(
+    public ActionResult GetRecipes(
         [FromServices]  IRecipeListService service,
         [FromQuery]     RecipeListRequestParams requestParams)
     {
         var recipes = service.GetRecipeListItems(requestParams);
 
-        var paginationMetadata = new
-        {
+        return Ok(new RecipeListResponse
+        (
             recipes.TotalCount,
             recipes.TotalPages,
             recipes.CurrentPage,
             recipes.PageSize,
-        };
-
-        Response.Headers.Add("X-Pagination",
-            JsonSerializer.Serialize(paginationMetadata));
-
-        return _mapper.Map<IEnumerable<RecipeListItem>>(recipes);
+            _mapper.Map<IEnumerable<RecipeListItem>>(recipes)
+        ));
     }
 
     [HttpGet]

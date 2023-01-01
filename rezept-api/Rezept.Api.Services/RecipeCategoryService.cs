@@ -14,8 +14,8 @@ public class RecipeCategoryService : IRecipeCategoryService
     public IEnumerable<RecipeCategoryItem> GetRecipeCategories()
     {
         var results = (from category in rezeptDbContext.Categories
-                      select new RecipeCategoryItem(category.Name)).ToList();
-        results.Insert(0, new RecipeCategoryItem(""));
+                      select new RecipeCategoryItem(category.Name, category.Name)).ToList();
+        results.Insert(0, new RecipeCategoryItem("All", ""));
 
         return results;
     }

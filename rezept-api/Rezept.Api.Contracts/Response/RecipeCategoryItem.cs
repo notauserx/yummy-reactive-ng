@@ -1,3 +1,3 @@
 ﻿namespace Rezept.Api.Contracts;
 
-public record RecipeCategoryItem(string name);
+public record RecipeCategoryItem(string name, string value);

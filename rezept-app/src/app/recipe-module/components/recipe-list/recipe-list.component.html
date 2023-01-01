@@ -6,12 +6,12 @@
 </div>
 <p-toast position="bottom-right"></p-toast>
 <div class="content-section implementation">
-    <div *ngIf="{recipes: recipeList$ |async} as data" class="card">
+    <div *ngIf="{response: recipeResponse$ |async} as data" class="card">
         <p-dataView #dv 
-          [value]="data.recipes ?? []" 
+          [value]="data.response?.recipes ?? []" 
           [paginator]="true" 
-          [rows]="9" 
-          [totalRecords]="90" 
+          [rows]="data.response?.pageSize ?? 9" 
+          [totalRecords]="data.response?.totalCount ?? 0" 
           filterBy="name" 
           layout="grid" 
           [lazy]="true" 
@@ -26,7 +26,7 @@
                         </span>
 
                         <p-dropdown *ngIf="recipeCategoryList$ | async as recipeCategoryList"
-                            [options]="recipeCategoryList" optionLabel="name" optionValue="name"
+                            [options]="recipeCategoryList" optionLabel="name" optionValue="value"
                             [(ngModel)]="filter.category" [showTransitionOptions]="'1ms'"
                             [hideTransitionOptions]="'1ms'" styleClass="mb-2 md:mb-0">
                         </p-dropdown>

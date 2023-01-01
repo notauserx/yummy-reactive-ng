@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Recipe } from 'src/app/models/recipe';
 import { RecipeFilter } from 'src/app/models/recipeFilter';
+import { RecipeListResponse } from 'src/app/models/RecipeListResponse';
 import { RecipeService } from '../../services/recipe.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { RecipeService } from '../../services/recipe.service';
 export class RecipeListComponent implements OnInit {
   
   recipeCategoryList$ = this.service.recipeCategoryList$
-  recipeList$: Observable<Recipe[]>| undefined;
+  recipeResponse$: Observable<RecipeListResponse>| undefined;
 
   filter: RecipeFilter = {
     searchTerm: '',
@@ -25,7 +25,7 @@ export class RecipeListComponent implements OnInit {
   constructor(private service : RecipeService) { }
   
   ngOnInit(): void {
-    this.recipeList$ = this.service.getRecipes(this.filter);
+    this.recipeResponse$ = this.service.getRecipes(this.filter);
   }
 
   onPaginate($event: PaginatorEvent) {
@@ -44,7 +44,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   private updateRecipeList() {
-    this.recipeList$ = this.service.getRecipes(this.filter);
+    this.recipeResponse$ = this.service.getRecipes(this.filter);
   }
 }
 

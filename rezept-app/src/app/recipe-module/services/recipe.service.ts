@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, Observable, share, throwError } from 'rxjs';
-import { Recipe } from 'src/app/models/recipe';
 import { RecipeCategory } from 'src/app/models/recipeCategory';
 import { RecipeFilter } from 'src/app/models/recipeFilter';
+import { RecipeListResponse } from 'src/app/models/RecipeListResponse';
 import { environment } from 'src/environment/environment';
 
 const BASE_URL = environment.baseUrl;
@@ -19,20 +19,11 @@ export class RecipeService {
     private messageService: MessageService
   ) {}
 
-  getRecipes(filter: RecipeFilter | null) : Observable<Recipe[]> {
+  getRecipes(filter: RecipeFilter | null) : Observable<RecipeListResponse> {
     const href = `${BASE_URL}/recipes`;
     let requestUrl =  `${href}`;
     
-    const params = new HttpParams();
-    if(filter) {
-      // TODO :: URI encode search term and category
-      
-      if(filter.category && filter.category != 'All') {
-        filter.category = ''
-      }
-    }
-
-    return this.http.get<Recipe[]>(requestUrl, 
+    return this.http.get<RecipeListResponse>(requestUrl, 
       {
         params: {...filter}
       })

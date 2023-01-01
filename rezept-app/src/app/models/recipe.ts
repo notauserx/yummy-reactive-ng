@@ -8,5 +8,3 @@ export interface Recipe {
   rating: number;
   imageUrl: string;
 }
-
-
