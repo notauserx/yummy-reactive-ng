@@ -1,1 +1,4 @@
 <p>recipe-detail works!</p>
+<div *ngIf="{response: recipeDetail$ | async} as data" class="card">
+  {{data.response | json}}
+</div>
