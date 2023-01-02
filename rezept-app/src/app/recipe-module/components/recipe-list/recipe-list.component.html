@@ -43,7 +43,11 @@
                     <div class="recipe-list-item">
                         <img [src]="recipe.imageUrl" [alt]="" />
                         <div class="recipe-list-detail">
-                            <div class="recipe-title">{{recipe.title}}</div>
+                            <div class="recipe-title">
+                                <a [routerLink]="['/recipe', recipe.id]">
+                                    {{recipe.title}}
+                                </a>
+                            </div>
                             <div class="recipe-description">{{recipe.description}}</div>
                             <p-rating [(ngModel)]="recipe.rating" [readonly]="true" [cancel]="false"></p-rating>
                             <i class="pi pi-tag recipe-category-icon"></i>
@@ -68,7 +72,11 @@
                         </div>
                         <div class="recipe-grid-item-content">
                             <img [src]="recipe.imageUrl" [alt]="" />
-                            <div class="recipe-title">{{recipe.title}}</div>
+                            <div class="recipe-title">
+                                <a [routerLink]="['/recipe', recipe.id]">
+                                    {{recipe.title}}
+                                </a>
+                            </div>
                             <div class="recipe-description">{{recipe.description}}</div>
                             <p-rating class="recipe-rating" [ngModel]="recipe.rating" [readonly]="true"
                                 [cancel]="false"></p-rating>
