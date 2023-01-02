@@ -8,7 +8,7 @@ public class RecipeListItem
     public int? Rating { get; set; }
     public int? Serves { get; set; }
     public string? Category { get; set; }
-    public string? imageUrl { get; set; }
-    public string? prepTime { get; set; }
-    public string? cookTim { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? PrepTime { get; set; }
+    public string? CookTime { get; set; }
 }

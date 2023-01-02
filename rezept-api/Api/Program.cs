@@ -23,6 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRecipeListService, RecipeListService>();
+builder.Services.AddScoped<IRecipeDetailService, RecipeDetailService>();
 builder.Services.AddScoped<IRecipeCategoryService, RecipeCategoryService>();
 
 builder.Services.AddDbContext<RezeptDbContext>(

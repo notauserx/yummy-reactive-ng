@@ -33,6 +33,17 @@ public class RecipesController : ControllerBase
         ));
     }
 
+    [HttpGet("{id}")]
+    [HttpHead("{id}")]
+    public async Task<ActionResult<RecipeDetailResponse>> GetRecipe(
+        [FromServices]  IRecipeDetailService service,
+        [FromRoute] Guid id)
+    {
+        var recipe = await service.GetRecipeDetailAsync(id);
+
+        return Ok(recipe);
+    }
+
     [HttpGet]
     [HttpHead]
     [Route("categories")]
