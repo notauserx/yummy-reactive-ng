@@ -21,9 +21,9 @@
 
     <ul class="ingredient-list">
       <li *ngFor="let ingredient of data.response?.ingredients ?? []; index as i;" style="display: contents">
-        <span class="ingredient-quantity"></span>
+        <span class="ingredient-quantity">{{ ingredient.quantity }}</span>
         <span class="ingredient-text">
-          {{ingredient}}
+          {{ingredient.item}}
         </span>
       </li>
 

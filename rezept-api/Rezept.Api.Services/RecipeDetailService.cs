@@ -41,8 +41,9 @@ public class RecipeDetailService : IRecipeDetailService
         response.CookTime = recipe?.CookTime;
         response.PrepTime = recipe?.PrepTime;
         response.Serves = recipe?.RecipeServings;
-
-        response.Ingredients = recipe?.Ingredients?.Select(i => i.Item).ToList() ?? new List<string>();
+        response.Ingredients = recipe?.Ingredients?
+            .Select(i => new RecipeIngredientResponse() { Item = i.Item, Quantity = i.Quantity }).ToList() 
+                ?? new List<RecipeIngredientResponse>();
         response.Steps = recipe?.Instructions?.OrderBy(i => i.Number).Select(i => $"Step {i.Number} - {i.Detail}").ToList() ?? new List<string>();
         response.AdditionalImageUrls = recipe?.AdditionalRecipeImageUrls?.Select(x => x.Url ?? string.Empty).ToList() ?? new List<string>();
         response.Keywords = recipe?.Keywords?.Select(k => k.Name ?? string.Empty).ToList() ?? new List<string>();

@@ -1,3 +1,4 @@
+import { Ingredient } from "./ingredient";
 
 export interface RecipeDetail {
   id: string;
@@ -9,7 +10,7 @@ export interface RecipeDetail {
   rating: number;
   imageUrl: string;
   author: string;
-  ingredients: string[];
+  ingredients: Ingredient[];
   steps: string[];
   additionalImageUrls: string[];
   keywords: string[];
