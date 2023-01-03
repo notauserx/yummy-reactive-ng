@@ -27,6 +27,10 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("RecipeId")
                         .HasColumnType("TEXT");
 

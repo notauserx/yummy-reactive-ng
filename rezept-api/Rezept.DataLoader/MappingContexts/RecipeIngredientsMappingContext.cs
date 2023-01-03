@@ -21,12 +21,11 @@ public class RecipeIngredientsMappingContext
         {
             if (i >= ingredientQuantities.Count) continue;
 
-            var ingredientDescription = ingredientQuantities[i] + " " + ingredientNames[i];
-
             result.Add(new Ingredient()
             {
                 Id = Guid.NewGuid(),
-                Item = ingredientDescription,
+                Quantity = ingredientQuantities[i],
+                Item = ingredientNames[i],
                 RecipeId = recipeId
             });
         }
