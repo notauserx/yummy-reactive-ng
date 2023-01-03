@@ -1,4 +1,32 @@
-<p>recipe-detail works!</p>
 <div *ngIf="{response: recipeDetail$ | async} as data" class="card">
-  {{data.response | json}}
+  <section class="layout__item directions">
+    <div class="heading">
+      <h3 id="directions">directions</h3>
+    </div>
+    <ul class="direction-list">
+      <li class="direction" *ngFor="let step of data.response?.steps ?? []">
+        {{step}}
+      </li>
+    </ul>
+  </section>
+
+  <section class="layout__item ingredients s">
+
+    <div class="heading">
+      <h3 id="ingredients">ingredients</h3>
+      <button class="button button--units svelte-1apyilh">
+        Units: <span class="value">US</span>
+      </button>
+    </div>
+
+    <ul class="ingredient-list">
+      <li *ngFor="let ingredient of data.response?.ingredients ?? []; index as i;" style="display: contents">
+        <span class="ingredient-quantity"></span>
+        <span class="ingredient-text">
+          {{ingredient}}
+        </span>
+      </li>
+
+    </ul>
+  </section>
 </div>
