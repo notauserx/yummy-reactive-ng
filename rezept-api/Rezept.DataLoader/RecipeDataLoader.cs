@@ -29,7 +29,7 @@ public class RecipeDataLoader : IDisposable
     public void ClearData()
     {
         var sql = @"
-            DELETE FROM recipes;
+            PRAGMA foreign_keys = 0;
             DELETE FROM authors;
             DELETE FROM categories;
             DELETE FROM ingredients;
@@ -39,6 +39,7 @@ public class RecipeDataLoader : IDisposable
             DELETE FROM recipeimageurls;
             DELETE FROM recipekeywords;
             DELETE FROM recipereviews;
+            DELETE FROM recipes;
             VACUUM;";
         dbContext.Database.ExecuteSqlRaw(sql);
     }
