@@ -1,32 +1,84 @@
-<div *ngIf="{response: recipeDetail$ | async} as data" class="card">
-  <section class="layout__item directions">
-    <div class="heading">
-      <h3 id="directions">directions</h3>
-    </div>
-    <ul class="direction-list">
-      <li class="direction" *ngFor="let step of data.response?.steps ?? []">
-        {{step}}
-      </li>
-    </ul>
-  </section>
+<div *ngIf="{response: recipeDetail$ | async} as data">
+    <ng-container *ngIf="data.response as recipeDetail">
+      <div class="grid mt-5" >
+        <div class="col-6 col-offset-2">
+            <h1 class="text-6xl">{{recipeDetail.title}}</h1>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-6 col-offset-2">
+          <p-rating [(ngModel)]="recipeDetail.rating" [readonly]="true" [cancel]="false"></p-rating>
+        </div>
+      </div>
+      <div class="grid mb-5">
+        <div class="col-6 col-offset-2">
+            <p class="text-xl w-10">Submitted by: {{recipeDetail.authorName}}</p>
+        </div>
+        <div class="col-6 col-offset-2">
+          <h1 class="text-xl w-10">{{recipeDetail.description}}</h1>
+      </div>
+      </div>
+      <div class="grid">
+        <div class="col-6 col-offset-2">
+          <div >
+            <p-galleria [value]="recipeDetail.imageUrls" [responsiveOptions]="responsiveOptions"
+              [containerStyle]="{'max-width': '640px'}" [numVisible]="5" [showThumbnails]="false" [showIndicators]="true"
+              [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true" [circular]="true" [showItemNavigators]="true">
+    
+              <ng-template pTemplate="item" let-item>
+                <img [src]="item" style="width: 100%; height: 450px; display: block;" />
+              </ng-template>
+              <ng-template pTemplate="thumbnail" let-item>
+                <div class="grid grid-nogutter justify-content-center">
+                  <img [src]="item" style="display: block;" />
+                </div>
+              </ng-template>
+            </p-galleria>
+          </div>
+        </div>
+      </div>
+      <div class="grid my-5">
+        <div class="col-3 col-offset-2">
+          <section>
+            <div class="heading">
+              <h2 id="directions">Directions</h2>
+            </div>
+            <ul class="direction-list">
+              <li class="direction" *ngFor="let step of recipeDetail.steps">
+                {{step.number}}
+                {{step.instruction}}
+              </li>
+            </ul>
+          </section>
+        </div>
+        <div class="col-3">
+          <section>
+    
+            <div class="heading">
+              <h2>Ingredients</h2>
+              <button class="button button--units svelte-1apyilh">
+                Units: <span class="value">US</span>
+              </button>
+            </div>
+    
+            <ul class="ingredient-list">
+              <li *ngFor="let ingredient of recipeDetail.ingredients ?? []; index as i;" style="display: contents">
+                <span class="ingredient-quantity">{{ ingredient.quantity }}</span>
+                <span class="ingredient-text">
+                  {{ingredient.item}}
+                </span>
+              </li>
+    
+            </ul>
+          </section>
+        </div>
+      </div>
+    </ng-container>
+  
+  
+  
+  
 
-  <section class="layout__item ingredients s">
+  
 
-    <div class="heading">
-      <h3 id="ingredients">ingredients</h3>
-      <button class="button button--units svelte-1apyilh">
-        Units: <span class="value">US</span>
-      </button>
-    </div>
-
-    <ul class="ingredient-list">
-      <li *ngFor="let ingredient of data.response?.ingredients ?? []; index as i;" style="display: contents">
-        <span class="ingredient-quantity">{{ ingredient.quantity }}</span>
-        <span class="ingredient-text">
-          {{ingredient.item}}
-        </span>
-      </li>
-
-    </ul>
-  </section>
 </div>

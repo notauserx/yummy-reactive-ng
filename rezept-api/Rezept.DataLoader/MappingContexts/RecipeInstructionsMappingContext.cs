@@ -5,7 +5,10 @@ public class RecipeInstructionsMappingContext
     public List<Instruction> HandleInstructions(string instructionsRaw, Guid recipeId)
     {
         var result = new List<Instruction>();
-        var instructions = instructionsRaw.BetweenBrackets().Split(",");
+        var instructions = instructionsRaw
+            .BetweenBrackets()
+            .Split(",")
+            .Select(x => x.Replace("\"", ""));
 
         var index = 1;
         foreach (var instruction in instructions)

@@ -36,16 +36,31 @@ public class RecipeDetailService : IRecipeDetailService
         response.Description = recipe.Description;
         response.Rating = recipe.Rating;
         response.Category = recipe?.Category?.Name;
-        response.ImageUrl = recipe?.ImageUrl;
         response.AuthorName = recipe?.Author?.DisplayName ?? string.Empty;
         response.CookTime = recipe?.CookTime;
         response.PrepTime = recipe?.PrepTime;
         response.Serves = recipe?.RecipeServings;
+        
         response.Ingredients = recipe?.Ingredients?
             .Select(i => new RecipeIngredientResponse() { Item = i.Item, Quantity = i.Quantity }).ToList() 
                 ?? new List<RecipeIngredientResponse>();
-        response.Steps = recipe?.Instructions?.OrderBy(i => i.Number).Select(i => $"Step {i.Number} - {i.Detail}").ToList() ?? new List<string>();
-        response.AdditionalImageUrls = recipe?.AdditionalRecipeImageUrls?.Select(x => x.Url ?? string.Empty).ToList() ?? new List<string>();
+        
+        response.Steps = recipe?.Instructions?
+            .OrderBy(i => i.Number)
+            .Select(i => new RecipeStepResponse() { Number = i.Number.ToString(), Instruction = i.Detail}).ToList()
+                ?? new List<RecipeStepResponse>();
+
+        response.ImageUrls = new List<string>();
+        
+        if(recipe?.ImageUrl != null)
+        {
+            response.ImageUrls.Add(recipe?.ImageUrl);
+        }
+
+        var additionalUrls = recipe?.AdditionalRecipeImageUrls?.Select(x => x.Url);
+
+        response.ImageUrls.AddRange(additionalUrls);
+
         response.Keywords = recipe?.Keywords?.Select(k => k.Name ?? string.Empty).ToList() ?? new List<string>();
         
         return response;

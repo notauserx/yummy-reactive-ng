@@ -8,6 +8,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {RatingModule} from 'primeng/rating';
 import {RippleModule} from 'primeng/ripple';
 import {ToastModule} from 'primeng/toast';
+import {GalleriaModule} from 'primeng/galleria';
 
 import { MessageService } from 'primeng/api';
 
@@ -22,6 +23,7 @@ import { MessageService } from 'primeng/api';
     RatingModule,
     RippleModule,
     ToastModule,
+    GalleriaModule,
   ],
   providers: [
     MessageService,
